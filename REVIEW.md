@@ -71,4 +71,4 @@ Defects found in the starter `app/main.py`. "Notice" gives a concrete failing in
 * `$gte`/`$lte` on `YYYY-MM-DD` strings is correct (lexicographic order equals date order) and the bounds are inclusive.
 * Default shift times (09:30 / 18:30) and the punch-in initial values (`punch_out` null, `overtime_minutes` 0, `half_day` false, `history` `[]`) match the contract.
 * `status_code=201` on both create endpoints is correct.
-* The `localhost` fallback for `MONGO_URI` is acceptable because environment values take priority. I would remove it for production.
+* The `localhost` fallback for `MONGO_URI` is acceptable because the environment values take priority. I would remove it for production.
