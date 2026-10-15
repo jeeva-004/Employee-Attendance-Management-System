@@ -8,3 +8,9 @@ the `department` and `joined_on` indexes the department queries. Rejected: an in
 3. **Ties.** Standard competition ranking via `$rank`; `limit` filters on rank, so every employee tied at the cutoff is returned and the list may exceed `limit`.
 4. **Headcount.** The pipeline starts from `employees` and `$lookup`s their logs, so someone with no logs still produces a row and is counted.
 5. **100x data.** Precompute daily per-department rollups on each punch, so analytics read small summaries instead of scanning logs.
+
+# Ambiguity
+
+The contract is ambiguous on moving_avg_7d: R8 rounds only “reported numbers” (so I average unrounded daily rates and round once at the end), but the rule also says “mean of attendance_rate values”, which could mean the already-rounded 4-decimal values. 
+
+Example: headcount 3, present 0 and 2 → unrounded average = 0.3333, average of rounded rates (0.0000, 0.6667) = 0.3334. I chose unrounded to avoid compounding rounding error, and it’s a one-line change if rounded is intended.
