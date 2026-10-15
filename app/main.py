@@ -303,7 +303,6 @@ def punch_in(body: PunchInIn):
 
 ATTENDANCE_SORT = {"date": -1, "emp_code": 1}
 
-#aggregation completed
 
 def attendance_filter(emp_code, date_from, date_to, status) -> dict:
     q = {}
